@@ -1,6 +1,5 @@
 package com.example.laptopshop.controller;
 
-import com.example.laptopshop.domain.dto.ResultPaginationDTO;
 import com.example.laptopshop.util.annotation.ApiMessage;
 import com.turkraft.springfilter.boot.Filter;
 import org.springframework.data.domain.PageRequest;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.laptopshop.domain.Company;
 import com.example.laptopshop.domain.User;
+import com.example.laptopshop.domain.response.ResultPaginationDTO;
 import com.example.laptopshop.service.CompanyService;
 import com.example.laptopshop.service.UserService;
 import com.example.laptopshop.util.error.GlobalException;

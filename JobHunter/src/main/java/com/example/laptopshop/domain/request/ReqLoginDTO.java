@@ -1,4 +1,4 @@
-package com.example.laptopshop.domain.dto;
+package com.example.laptopshop.domain.request;
 
 import jakarta.validation.constraints.NotBlank;
 

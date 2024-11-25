@@ -3,10 +3,10 @@ package com.example.laptopshop.controller;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.laptopshop.domain.dto.ResCreateUserDTO;
-import com.example.laptopshop.domain.dto.ResUpdateUserDTO;
-import com.example.laptopshop.domain.dto.ResUserDTO;
-import com.example.laptopshop.domain.dto.ResultPaginationDTO;
+import com.example.laptopshop.domain.response.ResCreateUserDTO;
+import com.example.laptopshop.domain.response.ResUpdateUserDTO;
+import com.example.laptopshop.domain.response.ResUserDTO;
+import com.example.laptopshop.domain.response.ResultPaginationDTO;
 import com.example.laptopshop.util.annotation.ApiMessage;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.PageRequest;

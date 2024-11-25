@@ -15,8 +15,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.laptopshop.domain.dto.ReqLoginDTO;
-import com.example.laptopshop.domain.dto.ResLoginDTO;
+import com.example.laptopshop.domain.request.ReqLoginDTO;
+import com.example.laptopshop.domain.response.ResLoginDTO;
 import com.example.laptopshop.util.SecurityUtil;
 
 import jakarta.validation.Valid;

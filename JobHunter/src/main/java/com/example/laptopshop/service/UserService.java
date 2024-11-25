@@ -4,7 +4,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.example.laptopshop.domain.dto.*;
+import com.example.laptopshop.domain.response.ResCreateUserDTO;
+import com.example.laptopshop.domain.response.ResUpdateUserDTO;
+import com.example.laptopshop.domain.response.ResUserDTO;
+import com.example.laptopshop.domain.response.ResultPaginationDTO;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -57,10 +61,10 @@ public class UserService {
         return this.userRepository.findByEmail(username);
     }
 
-    public ResultPaginationDTO handleGetAllUser(Specification<User> spec,Pageable pageable) {
-        Page<User> users = this.userRepository.findAll(spec,pageable);
+    public ResultPaginationDTO handleGetAllUser(Specification<User> spec, Pageable pageable) {
+        Page<User> users = this.userRepository.findAll(spec, pageable);
         ResultPaginationDTO rs = new ResultPaginationDTO();
-        Meta meta = new Meta();
+        ResultPaginationDTO.Meta meta = new ResultPaginationDTO.Meta();
         meta.setPage(pageable.getPageNumber() + 1);
         meta.setPageSize(pageable.getPageSize());
 
@@ -68,12 +72,12 @@ public class UserService {
         meta.setPages(users.getTotalPages());
 
         rs.setMeta(meta);
-        List<ResUserDTO> userList = users.getContent().stream().map(item ->
-                    new ResUserDTO(item.getId(),item.getName(),item.getEmail(),
-                            item.getAge(),item.getAddress(),item.getGender(),
-                            item.getCreatedAt(),item.getUpdatedAt(),
-                            item.getCreatedBy(), item.getUpdatedBy())
-                    ).collect(Collectors.toList());
+        List<ResUserDTO> userList = users.getContent().stream()
+                .map(item -> new ResUserDTO(item.getId(), item.getName(), item.getEmail(),
+                        item.getAge(), item.getAddress(), item.getGender(),
+                        item.getCreatedAt(), item.getUpdatedAt(),
+                        item.getCreatedBy(), item.getUpdatedBy()))
+                .collect(Collectors.toList());
         rs.setResult(userList);
         return rs;
     }
@@ -88,7 +92,7 @@ public class UserService {
         res.setAddress(user.getAddress());
         res.setCreatedAt(user.getCreatedAt());
         res.setCreatedBy(user.getCreatedBy());
-        return  res;
+        return res;
     }
 
     public ResUserDTO convertResUserDTO(User user) {
@@ -103,7 +107,7 @@ public class UserService {
         res.setCreatedBy(user.getCreatedBy());
         res.setUpdatedAt(user.getUpdatedAt());
         res.setUpdatedBy(user.getUpdatedBy());
-        return  res;
+        return res;
     }
 
     public ResUpdateUserDTO covertToResUpdateUserDTO(User user) {
@@ -116,10 +120,10 @@ public class UserService {
         res.setAddress(user.getAddress());
         res.setUpdatedAt(user.getUpdatedAt());
         res.setUpdatedBy(user.getUpdatedBy());
-        return  res;
+        return res;
     }
 
-    public void updateUserToken(String token,String email) {
+    public void updateUserToken(String token, String email) {
         User currentUser = this.handleGetUserByUsername(email);
         if (currentUser != null) {
             currentUser.setRefreshToken(token);
@@ -127,7 +131,7 @@ public class UserService {
         }
     }
 
-    public User getUserByRefreshTokenAndEmail(String refreshToken, String email){
-        return this.userRepository.findByRefreshTokenAndEmail(refreshToken,email);
+    public User getUserByRefreshTokenAndEmail(String refreshToken, String email) {
+        return this.userRepository.findByRefreshTokenAndEmail(refreshToken, email);
     }
 }

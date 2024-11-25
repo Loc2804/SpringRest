@@ -1,19 +1,15 @@
-package com.example.laptopshop.domain.dto;
+package com.example.laptopshop.domain.response;
 
 import com.example.laptopshop.util.constant.GenderEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.Instant;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class ResUserDTO {
+public class ResUpdateUserDTO {
     private long id;
     private String name;
     private String email;
@@ -22,8 +18,6 @@ public class ResUserDTO {
     private GenderEnum gender;
 
     //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss a", timezone = "GMT+7")
-    private Instant createdAt;
     private Instant updatedAt;
-    private String createdBy;
     private String updatedBy;
 }

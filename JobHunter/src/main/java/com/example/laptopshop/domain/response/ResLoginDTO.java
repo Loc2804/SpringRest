@@ -1,4 +1,4 @@
-package com.example.laptopshop.domain.dto;
+package com.example.laptopshop.domain.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

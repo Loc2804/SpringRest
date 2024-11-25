@@ -1,7 +1,5 @@
 package com.example.laptopshop.service;
 
-import com.example.laptopshop.domain.dto.Meta;
-import com.example.laptopshop.domain.dto.ResultPaginationDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -9,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.laptopshop.domain.Company;
 import com.example.laptopshop.domain.User;
+import com.example.laptopshop.domain.response.ResultPaginationDTO;
 import com.example.laptopshop.repository.CompanyRepository;
 import com.example.laptopshop.repository.UserRepository;
 
@@ -27,10 +26,10 @@ public class CompanyService {
         return this.companyRepository.save(company);
     }
 
-    public  ResultPaginationDTO handleGetAllCompanies(Specification<Company> spec,Pageable pageable) {
-        Page<Company> companies = this.companyRepository.findAll(spec,pageable);
+    public ResultPaginationDTO handleGetAllCompanies(Specification<Company> spec, Pageable pageable) {
+        Page<Company> companies = this.companyRepository.findAll(spec, pageable);
         ResultPaginationDTO rs = new ResultPaginationDTO();
-        Meta meta = new Meta();
+        ResultPaginationDTO.Meta meta = new ResultPaginationDTO.Meta();
         meta.setTotal(companies.getTotalElements());
         meta.setPages(companies.getTotalPages());
 
@@ -42,7 +41,9 @@ public class CompanyService {
         return rs;
     }
 
-    public void DeleteCompany(Long id) {this.companyRepository.deleteById(id);}
+    public void DeleteCompany(Long id) {
+        this.companyRepository.deleteById(id);
+    }
 
     public Company handleGetCompanyById(long id) {
         Optional<Company> company = this.companyRepository.findById(id);
@@ -51,6 +52,7 @@ public class CompanyService {
         }
         return null;
     }
+
     public Company updateCompany(Company company) {
         Company updateCompany = this.handleGetCompanyById(company.getId());
         if (updateCompany != null) {
