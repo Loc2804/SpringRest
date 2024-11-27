@@ -75,7 +75,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(this.userService.handleGetAllUser(spec,pageable));
     }
 
-    @PutMapping("users")
+    @PutMapping("/users")
     @ApiMessage("Update a user")
     public ResponseEntity<ResUpdateUserDTO> putMethodName(@RequestBody User putUser) throws InvalidIdException {
         User user = this.userService.handleUpdateUser(putUser);
@@ -84,4 +84,6 @@ public class UserController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(this.userService.covertToResUpdateUserDTO(user));
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.laptopshop.service;
 
+import com.turkraft.springfilter.boot.Filter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -17,16 +18,17 @@ import java.util.Optional;
 @Service
 public class CompanyService {
     private final CompanyRepository companyRepository;
-
-    public CompanyService(CompanyRepository companyRepository) {
+    private final UserRepository userRepository;
+    public CompanyService(CompanyRepository companyRepository,UserRepository userRepository) {
         this.companyRepository = companyRepository;
+        this.userRepository = userRepository;
     }
 
     public Company handleCreateCompany(Company company) {
         return this.companyRepository.save(company);
     }
 
-    public ResultPaginationDTO handleGetAllCompanies(Specification<Company> spec, Pageable pageable) {
+    public ResultPaginationDTO handleGetAllCompanies(@Filter Specification<Company> spec, Pageable pageable) {
         Page<Company> companies = this.companyRepository.findAll(spec, pageable);
         ResultPaginationDTO rs = new ResultPaginationDTO();
         ResultPaginationDTO.Meta meta = new ResultPaginationDTO.Meta();
@@ -42,6 +44,12 @@ public class CompanyService {
     }
 
     public void DeleteCompany(Long id) {
+        Optional<Company> company = this.companyRepository.findById(id);
+        if (company.isPresent()) {
+            Company com = company.get();
+            List<User> users = this.userRepository.findByCompany(com);
+            this.userRepository.deleteAll(users);
+        }
         this.companyRepository.deleteById(id);
     }
 
@@ -63,5 +71,9 @@ public class CompanyService {
             this.companyRepository.save(updateCompany);
         }
         return updateCompany;
+    }
+    public Optional<Company> findById(long id) {
+        Optional<Company> company = this.companyRepository.findById(id);
+        return company.isPresent() ? company : Optional.empty();
     }
 }

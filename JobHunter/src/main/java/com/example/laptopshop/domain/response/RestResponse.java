@@ -1,4 +1,4 @@
-package com.example.laptopshop.domain;
+package com.example.laptopshop.domain.response;
 
 public class RestResponse<T> {
     private int statusCode;

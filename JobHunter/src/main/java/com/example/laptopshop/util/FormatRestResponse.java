@@ -1,5 +1,6 @@
 package com.example.laptopshop.util;
 
+import com.example.laptopshop.domain.response.RestResponse;
 import com.example.laptopshop.util.annotation.ApiMessage;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -8,8 +9,6 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
-
-import com.example.laptopshop.domain.RestResponse;
 
 import jakarta.servlet.http.HttpServletResponse;
 

@@ -1,21 +1,22 @@
 package com.example.laptopshop.domain;
 
-import java.time.Instant;
-import java.util.List;
-
 import com.example.laptopshop.util.SecurityUtil;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.example.laptopshop.util.constant.GenderEnum;
+import com.example.laptopshop.util.constant.LevelEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Instant;
+import java.util.List;
+
 @Entity
-@Table(name = "companies")
+@Table(name = "skills")
 @Getter
 @Setter
-public class Company {
+public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -23,24 +24,14 @@ public class Company {
     @NotBlank(message = "Name is not allowed to be empty")
     private String name;
 
-    @Column(columnDefinition = "MEDIUMTEXT")
-    private String description;
-
-    private String address;
-    private String logo;
-    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss a", timezone = "GMT+7") // -> chỉ ảnh hưởng đến thuộc tính ngay bên dưới nó
     private Instant createdAt;
     private Instant updatedAt;
     private String createdBy;
     private String updatedBy;
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "skills")
     @JsonIgnore
-    List<User> users;
-
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
-    @JsonIgnore
-    List<Job> jobs;
+    private List<Job> jobs;
 
     @PrePersist
     public void handleBeforeCreate() {

@@ -1,5 +1,6 @@
 package com.example.laptopshop.domain.response;
 
+import com.example.laptopshop.domain.Company;
 import com.example.laptopshop.util.constant.GenderEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.EnumType;
@@ -19,7 +20,14 @@ public class ResCreateUserDTO {
     private int age;
     private String address;
     private GenderEnum gender;
-    
+    private CompanyUser company;
     private Instant createdAt;
     private String createdBy;
+
+    @Getter
+    @Setter
+    public static class CompanyUser{
+        private long id;
+        private String name;
+    }
 }

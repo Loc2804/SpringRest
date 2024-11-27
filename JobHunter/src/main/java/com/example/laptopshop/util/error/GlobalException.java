@@ -16,9 +16,9 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import com.example.laptopshop.domain.RestResponse;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
+
+import com.example.laptopshop.domain.response.RestResponse;
 
 @RestControllerAdvice
 public class GlobalException {

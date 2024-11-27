@@ -14,6 +14,7 @@ import java.time.Instant;
 @Table(name = "users")
 @Getter
 @Setter
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +38,10 @@ public class User {
     private Instant updatedAt;
     private String createdBy;
     private String updatedBy;
+
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     @PrePersist
     public void handleBeforeCreate() {
