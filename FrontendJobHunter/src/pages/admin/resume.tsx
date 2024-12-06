@@ -2,7 +2,7 @@ import DataTable from "@/components/client/data-table";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { IResume } from "@/types/backend";
 import { ActionType, ProColumns, ProFormSelect } from '@ant-design/pro-components';
-import { Space, message, notification } from "antd";
+import { Space, message, notification , Popconfirm} from "antd";
 import { useState, useRef } from 'react';
 import dayjs from 'dayjs';
 import { callDeleteResume } from "@/config/api";
@@ -12,7 +12,7 @@ import ViewDetailResume from "@/components/admin/resume/view.resume";
 import { ALL_PERMISSIONS } from "@/config/permissions";
 import Access from "@/components/share/access";
 import { sfIn } from "spring-filter-query-builder";
-import { EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined,EditOutlined } from "@ant-design/icons";
 
 const ResumePage = () => {
     const tableRef = useRef<ActionType>();
@@ -135,7 +135,7 @@ const ResumePage = () => {
                         }}
                     />
 
-                    {/* <Popconfirm
+                    <Popconfirm
                         placement="leftTop"
                         title={"Xác nhận xóa resume"}
                         description={"Bạn có chắc chắn muốn xóa resume này ?"}
@@ -151,7 +151,7 @@ const ResumePage = () => {
                                 }}
                             />
                         </span>
-                    </Popconfirm> */}
+                    </Popconfirm>
                 </Space>
             ),
 

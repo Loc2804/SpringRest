@@ -1,9 +1,9 @@
 package com.example.laptopshop.controller;
 
 import com.example.laptopshop.domain.Job;
-import com.example.laptopshop.domain.response.ResCreateJobDTO;
-import com.example.laptopshop.domain.response.ResJobDTO;
-import com.example.laptopshop.domain.response.ResUpdateJobDTO;
+import com.example.laptopshop.domain.response.job.ResCreateJobDTO;
+import com.example.laptopshop.domain.response.job.ResJobDTO;
+import com.example.laptopshop.domain.response.job.ResUpdateJobDTO;
 import com.example.laptopshop.domain.response.ResultPaginationDTO;
 import com.example.laptopshop.service.JobService;
 import com.example.laptopshop.util.annotation.ApiMessage;
@@ -64,6 +64,6 @@ public class JobController {
         if(job == null){
             throw new InvalidIdException("Job not found");
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.jobService.updateJob(postJob));
+        return ResponseEntity.ok().body(this.jobService.updateJob(postJob));
     }
 }

@@ -3,10 +3,11 @@ package com.example.laptopshop.service;
 import com.example.laptopshop.domain.Company;
 import com.example.laptopshop.domain.Job;
 import com.example.laptopshop.domain.Skill;
-import com.example.laptopshop.domain.response.ResCreateJobDTO;
-import com.example.laptopshop.domain.response.ResJobDTO;
-import com.example.laptopshop.domain.response.ResUpdateJobDTO;
+import com.example.laptopshop.domain.response.job.ResCreateJobDTO;
+import com.example.laptopshop.domain.response.job.ResJobDTO;
+import com.example.laptopshop.domain.response.job.ResUpdateJobDTO;
 import com.example.laptopshop.domain.response.ResultPaginationDTO;
+import com.example.laptopshop.domain.response.resume.ResResumeDTO;
 import com.example.laptopshop.repository.JobRepository;
 import com.example.laptopshop.repository.SkillRepository;
 import com.turkraft.springfilter.boot.Filter;
@@ -23,15 +24,21 @@ import java.util.stream.Collectors;
 public class JobService {
     private final JobRepository jobRepository;
     private final SkillRepository skillRepository;
-    public JobService(JobRepository jobRepository,SkillRepository skillRepository) {
+    private final CompanyService companyService;
+    public JobService(JobRepository jobRepository,SkillRepository skillRepository,CompanyService companyService) {
         this.jobRepository = jobRepository;
         this.skillRepository = skillRepository;
+        this.companyService = companyService;
     }
 
     public boolean isExistJobName(String jobName) {
         return this.jobRepository.existsByName(jobName);
     }
     public ResCreateJobDTO createJob(Job job) {
+        if(job.getCompany() !=null){
+            Optional<Company> company = this.companyService.findById(job.getCompany().getId());
+            job.setCompany(company.isPresent()?company.get():null);
+        }
         if(job.getSkills() != null){
             List<Long> reqSkills = job.getSkills().stream()
                     .map(x -> x.getId()).collect(Collectors.toList());
@@ -81,8 +88,11 @@ public class JobService {
         jobDTO.setUpdatedAt(job.getUpdatedAt());
         jobDTO.setUpdatedBy(job.getUpdatedBy());
         if (job.getSkills() != null) {
-            List<String> skills = job.getSkills().stream().map(x -> x.getName()).collect(Collectors.toList());
+            List<ResJobDTO.SkillsJob> skills = job.getSkills().stream().map(x -> new ResJobDTO.SkillsJob(x.getId(), x.getName())).collect(Collectors.toList());
             jobDTO.setSkills(skills);
+        }
+        if(job.getCompany() != null){
+            jobDTO.setCompany(job.getCompany());
         }
         return jobDTO;
     }
@@ -109,6 +119,11 @@ public class JobService {
     }
     public ResUpdateJobDTO updateJob(Job job) {
         Job currentJob = this.getJobById(job.getId());
+        if(job.getCompany() !=null) {
+            Optional<Company> company = this.companyService.findById(job.getCompany().getId());
+            job.setCompany(company.isPresent() ? company.get() : null);
+            currentJob.setCompany(company.isPresent()?company.get():null);
+        }
         if(job.getSkills() != null) {
             List<Long> reqSkills = job.getSkills().stream()
                     .map(x -> x.getId()).collect(Collectors.toList());

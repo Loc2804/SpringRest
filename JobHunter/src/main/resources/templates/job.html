@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Gửi Email</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            width: 100%;
+        }
+        .container {
+            width: 50%;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            border: 10px #ccc; /* Lớp nền màu xám 10px */
+            margin: 50px auto;
+        }
+        .heading {
+            font-size: 26px;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .greeting, .intro {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .job-list {
+            margin-top: 20px;
+            padding: 0;
+            list-style: none;
+        }
+        .job {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: left;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .job-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .view-more-btn {
+            display: block;
+            padding: 12px;
+            background-color: #ff4d4d;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="heading">Job Hunter App</h2>
+    <p class="greeting">Hi <span th:text="${name}"></span>,</p>
+    <p class="intro">One of these jobs may be your next one. Find out today!</p>
+
+    <table class="job-list" >
+        <tr th:each="job : ${jobs}">
+            <td>
+                <div style="font-size: 16px;">
+                    <a th:href="@{'http://localhost:3000/job/' + ${job.slug} + '?id=' + ${job.id}}" target="_blank" style="text-decoration: none;" th:text="${job.name}"></a>
+                </div>
+                <div style="font-size: 14px;" th:text="${job.company.name}"></div>
+                <div style="font-size: 14px;">
+                    <span th:text="${#numbers.formatDecimal(job.salary, 0, 'COMMA', 0, 'POINT')}"></span>₫
+                </div>
+                <div style="margin-top: 5px;">
+                    <span style="font-size: 14px; background: #e8e8e8; padding: 3px; margin-right: 5px;" th:each="skill : ${job.skills}" th:text="${skill.name}"></span>
+                </div>
+                <div style="margin: 15px 0; border-top: 10px dashed rgba(5, 5, 5, 0.06);"></div>
+            </td>
+        </tr>
+    </table>
+
+    <a href="#" class="view-more-btn">Xem thêm job tại Hỏi Dân IT</a>
+</div>
+</body>
+</html>

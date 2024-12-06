@@ -3,6 +3,7 @@ package com.example.laptopshop.util;
 import com.example.laptopshop.domain.response.RestResponse;
 import com.example.laptopshop.util.annotation.ApiMessage;
 import org.springframework.core.MethodParameter;
+import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
@@ -28,7 +29,7 @@ public class FormatRestResponse implements ResponseBodyAdvice<Object> {
         RestResponse<Object> rs = new RestResponse<Object>();
         rs.setStatusCode(status);
 
-        if (body instanceof String) {
+        if (body instanceof String || body instanceof Resource) {
             return body;
         }
         if (status >= 400) {

@@ -1,8 +1,6 @@
 package com.example.laptopshop.controller;
 
 import com.example.laptopshop.domain.Skill;
-import com.example.laptopshop.domain.User;
-import com.example.laptopshop.domain.response.ResCreateUserDTO;
 import com.example.laptopshop.domain.response.ResultPaginationDTO;
 import com.example.laptopshop.service.SkillService;
 import com.example.laptopshop.util.annotation.ApiMessage;
@@ -14,8 +12,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")

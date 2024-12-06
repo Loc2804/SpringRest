@@ -38,7 +38,7 @@ const LayoutAdmin = () => {
 
     useEffect(() => {
         const ACL_ENABLE = import.meta.env.VITE_ACL_ENABLE;
-        //if (permissions?.length || ACL_ENABLE === 'false') {
+        if (permissions?.length || ACL_ENABLE === 'false') {
 
             const viewCompany = permissions?.find(item =>
                 item.apiPath === ALL_PERMISSIONS.COMPANIES.GET_PAGINATE.apiPath
@@ -71,93 +71,88 @@ const LayoutAdmin = () => {
             )
             
 
-            // const full = [
-            //     {
-            //         label: <Link to='/admin'>Dashboard</Link>,
-            //         key: '/admin',
-            //         icon: <AppstoreOutlined />
-            //     },
-            //     ...(viewCompany || ACL_ENABLE === 'false' ? [{
-            //         label: <Link to='/admin/company'>Company</Link>,
-            //         key: '/admin/company',
-            //         icon: <BankOutlined />,
-            //     }] : []),
-
-            //     ...(viewUser || ACL_ENABLE === 'false' ? [{
-            //         label: <Link to='/admin/user'>User</Link>,
-            //         key: '/admin/user',
-            //         icon: <UserOutlined />
-            //     }] : []),
-            //     ...(viewJob || ACL_ENABLE === 'false' ? [{
-            //         label: <Link to='/admin/job'>Job</Link>,
-            //         key: '/admin/job',
-            //         icon: <ScheduleOutlined />
-            //     }] : []),
-
-            //     ...(viewResume || ACL_ENABLE === 'false' ? [{
-            //         label: <Link to='/admin/resume'>Resume</Link>,
-            //         key: '/admin/resume',
-            //         icon: <AliwangwangOutlined />
-            //     }] : []),
-            //     ...(viewPermission || ACL_ENABLE === 'false' ? [{
-            //         label: <Link to='/admin/permission'>Permission</Link>,
-            //         key: '/admin/permission',
-            //         icon: <ApiOutlined />
-            //     }] : []),
-            //     ...(viewRole || ACL_ENABLE === 'false' ? [{
-            //         label: <Link to='/admin/role'>Role</Link>,
-            //         key: '/admin/role',
-            //         icon: <ExceptionOutlined />
-            //     }] : []),
-
-
-
-            // ];
             const full = [
                 {
                     label: <Link to='/admin'>Dashboard</Link>,
                     key: '/admin',
                     icon: <AppstoreOutlined />
                 },
-              {
+                ...(viewCompany || ACL_ENABLE === 'false' ? [{
                     label: <Link to='/admin/company'>Company</Link>,
                     key: '/admin/company',
                     icon: <BankOutlined />,
-                },
+                }] : []),
 
-              {
+                ...(viewUser || ACL_ENABLE === 'false' ? [{
                     label: <Link to='/admin/user'>User</Link>,
                     key: '/admin/user',
                     icon: <UserOutlined />
-                },
-              {
+                }] : []),
+                ...(viewJob || ACL_ENABLE === 'false' ? [{
                     label: <Link to='/admin/job'>Job</Link>,
                     key: '/admin/job',
                     icon: <ScheduleOutlined />
-                },
+                }] : []),
 
-             {
+                ...(viewResume || ACL_ENABLE === 'false' ? [{
                     label: <Link to='/admin/resume'>Resume</Link>,
                     key: '/admin/resume',
                     icon: <AliwangwangOutlined />
-                },
-           {
+                }] : []),
+                ...(viewPermission || ACL_ENABLE === 'false' ? [{
                     label: <Link to='/admin/permission'>Permission</Link>,
                     key: '/admin/permission',
                     icon: <ApiOutlined />
-                },
-            {
+                }] : []),
+                ...(viewRole || ACL_ENABLE === 'false' ? [{
                     label: <Link to='/admin/role'>Role</Link>,
                     key: '/admin/role',
                     icon: <ExceptionOutlined />
-                }
-
-
-
+                }] : []),
             ];
+        //     const full = [
+        //         {
+        //             label: <Link to='/admin'>Dashboard</Link>,
+        //             key: '/admin',
+        //             icon: <AppstoreOutlined />
+        //         },
+        //       {
+        //             label: <Link to='/admin/company'>Company</Link>,
+        //             key: '/admin/company',
+        //             icon: <BankOutlined />,
+        //         },
+
+        //       {
+        //             label: <Link to='/admin/user'>User</Link>,
+        //             key: '/admin/user',
+        //             icon: <UserOutlined />
+        //         },
+        //       {
+        //             label: <Link to='/admin/job'>Job</Link>,
+        //             key: '/admin/job',
+        //             icon: <ScheduleOutlined />
+        //         },
+
+        //      {
+        //             label: <Link to='/admin/resume'>Resume</Link>,
+        //             key: '/admin/resume',
+        //             icon: <AliwangwangOutlined />
+        //         },
+        //    {
+        //             label: <Link to='/admin/permission'>Permission</Link>,
+        //             key: '/admin/permission',
+        //             icon: <ApiOutlined />
+        //         },
+        //     {
+        //             label: <Link to='/admin/role'>Role</Link>,
+        //             key: '/admin/role',
+        //             icon: <ExceptionOutlined />
+        //         }
+
+        //     ];
 
             setMenuItems(full);
-        //}
+        }
     }, [permissions])
     useEffect(() => {
         setActiveMenu(location.pathname)

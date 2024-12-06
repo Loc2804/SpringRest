@@ -1,19 +1,14 @@
 package com.example.laptopshop.controller;
 
-import java.util.List;
-import java.util.Optional;
-
-import com.example.laptopshop.domain.response.ResCreateUserDTO;
-import com.example.laptopshop.domain.response.ResUpdateUserDTO;
-import com.example.laptopshop.domain.response.ResUserDTO;
+import com.example.laptopshop.domain.response.user.ResCreateUserDTO;
+import com.example.laptopshop.domain.response.user.ResUpdateUserDTO;
+import com.example.laptopshop.domain.response.user.ResUserDTO;
 import com.example.laptopshop.domain.response.ResultPaginationDTO;
 import com.example.laptopshop.util.annotation.ApiMessage;
 import jakarta.validation.Valid;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;

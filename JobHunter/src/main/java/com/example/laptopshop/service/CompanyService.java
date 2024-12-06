@@ -1,5 +1,7 @@
 package com.example.laptopshop.service;
 
+import com.example.laptopshop.domain.Job;
+import com.example.laptopshop.repository.JobRepository;
 import com.turkraft.springfilter.boot.Filter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,9 +21,11 @@ import java.util.Optional;
 public class CompanyService {
     private final CompanyRepository companyRepository;
     private final UserRepository userRepository;
-    public CompanyService(CompanyRepository companyRepository,UserRepository userRepository) {
+    private final JobRepository jobRepository;
+    public CompanyService(CompanyRepository companyRepository,UserRepository userRepository,JobRepository jobRepository) {
         this.companyRepository = companyRepository;
         this.userRepository = userRepository;
+        this.jobRepository = jobRepository;
     }
 
     public Company handleCreateCompany(Company company) {
@@ -48,6 +52,8 @@ public class CompanyService {
         if (company.isPresent()) {
             Company com = company.get();
             List<User> users = this.userRepository.findByCompany(com);
+            List<Job> jobs = this.jobRepository.findByCompany(com);
+            this.jobRepository.deleteAll(jobs);
             this.userRepository.deleteAll(users);
         }
         this.companyRepository.deleteById(id);
